@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
-import All from "../pages/all.vue";
+import ToDoList from "../views/ToDoList.vue";
+import Home from "../views/Home.vue"
 
 const routes = [
   {
@@ -9,7 +10,7 @@ const routes = [
   {
     path: "/all",
     name: "All",
-    component: All,
+    component: ToDoList,
   },
 ];
 
