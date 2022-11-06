@@ -3,7 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import All from "../views/all.vue";
-
+import All from '../views/all.vue';
 </script>
-
