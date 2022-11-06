@@ -13,7 +13,7 @@ defineProps<{
 }>();
 </script>
 
-<style scoped>
+<style>
 .todo-list {
   margin: 0;
   padding: 0;

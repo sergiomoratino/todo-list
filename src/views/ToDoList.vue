@@ -1,30 +1,38 @@
 <template>
   <div class="todoapp">
-    <div v-if="todos.length > 0" class="main">
+    <div class="head">
+      <NewTask :number-of-items="tasks.length" />
+    </div>
+    <div v-if="tasks.length > 0" class="main">
       <div v-for="task in tasks" :key="task.id">
         <Task :name="task.name" />
       </div>
     </div>
-    <div v-if="todos.length > 0" class="footer">
-      <Footer :number-of-items="todos.length" />
+    <div v-if="tasks.length > 0" class="footer">
+      <Footer :number-of-items="tasks.length" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import todos from '../mock/todos';
 import Task from '../components/Task.vue';
 import Footer from '../components/Footer.vue';
+import NewTask from '../components/NewTask.vue';
 import { tasksStore } from '../store/tasks';
 import { storeToRefs } from 'pinia';
+import { watch } from 'vue';
 
 const { tasks } = storeToRefs(tasksStore());
 const { fetchTasks } = tasksStore();
 
 fetchTasks();
+
+watch(() => storeToRefs, (numberOfItems) => {
+  console.log('chang',numberOfItems)
+})
 </script>
 
-<style scoped>
+<style>
 .todoapp {
   background: #fff;
   margin: 130px 0 40px 0;

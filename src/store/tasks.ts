@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 export interface task {
   id: Number;
   name: String;
+  completed: boolean;
 }
 
 export const tasksStore = defineStore({
@@ -20,10 +21,26 @@ export const tasksStore = defineStore({
         const response = await fetch('http://localhost:3002/tasks');
         const tasks = await response.json();
         this.tasks = tasks;
-        console.log('ee', this.tasks);
       } catch (err) {
         console.error(err);
       }
+    },
+
+    async postTask(newTask: task) {
+      try {
+        const response = await fetch('http://localhost:3002/tasks', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newTask),
+        });
+        const tasks = await response.json();
+        this.tasks = tasks;
+      } catch (err) {
+        console.error(err);
+      }
+      this.fetchTasks();
     },
   },
 });
