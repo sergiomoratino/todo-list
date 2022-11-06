@@ -1,13 +1,13 @@
 <template>
-  <div class="todo-list">
-    <ul>
-      <li>{{ name }}</li>
-    </ul>
-  </div>
+  <ul class="todo-list">
+    <li>
+      <input class="toggle" type="checkbox">
+      <label>{{ name }}</label>
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
-import Vue from 'vue';
 defineProps<{
   name: String;
 }>();
