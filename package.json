@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "db:start": "json-server --watch db.json --port 3002"
   },
   "dependencies": {
+    "json-server": "^0.17.1",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
   },
