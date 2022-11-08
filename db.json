@@ -3,17 +3,17 @@
     {
       "id": "1",
       "name": "Curso Javascript",
-      "completed": "false"
+      "completed": false
     },
     {
       "id": "2",
       "name": "Curso HTML",
-      "completed": "false"
+      "completed": false
     },
     {
       "id": "3",
       "name": "Curso CSS",
-      "completed": "false"
+      "completed": false
     },
     {
       "id": 4,
@@ -22,32 +22,7 @@
     },
     {
       "id": 5,
-      "name": "adios",
-      "completed": false
-    },
-    {
-      "id": 6,
-      "name": "Pepe",
-      "completed": false
-    },
-    {
-      "id": 7,
-      "name": "6",
-      "completed": false
-    },
-    {
-      "id": 8,
-      "name": "7",
-      "completed": false
-    },
-    {
-      "id": 9,
-      "name": "8",
-      "completed": false
-    },
-    {
-      "id": 10,
-      "name": "9",
+      "name": "eee",
       "completed": false
     }
   ]

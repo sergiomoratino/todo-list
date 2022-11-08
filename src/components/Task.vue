@@ -1,16 +1,29 @@
 <template>
   <ul class="todo-list">
     <li>
-      <input class="toggle" type="checkbox">
-      <label>{{ name }}</label>
+      <input
+        class="toggle"
+        type="checkbox"
+        @click="$emit('checkTask')"
+      />
+      <label v-if="!task.completed">{{ task.name }}</label>
+      <label class="completed-task" v-else>{{ task.name }}</label>
     </li>
   </ul>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface task {
+  id: Number;
   name: String;
+  completed: boolean;
+}
+
+defineProps<{
+  task: task;
 }>();
+
+
 </script>
 
 <style>
@@ -124,5 +137,9 @@ defineProps<{
 
 .todo-list li.editing:last-child {
   margin-bottom: -1px;
+}
+
+.completed-task {
+  text-decoration: line-through;
 }
 </style>

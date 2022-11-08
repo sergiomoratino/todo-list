@@ -5,7 +5,7 @@
     </div>
     <div v-if="tasks.length > 0" class="main">
       <div v-for="task in tasks" :key="task.id">
-        <Task :name="task.name" />
+        <Task :task="task" @checkTask="checkTask(task.id)" />
       </div>
     </div>
     <div v-if="tasks.length > 0" class="footer">
@@ -22,7 +22,13 @@ import { tasksStore } from '../store/tasks';
 import { storeToRefs } from 'pinia';
 import { watch } from 'vue';
 
-const { tasks } = storeToRefs(tasksStore());
+interface task {
+  id: Number;
+  name: String;
+  completed: boolean;
+}
+
+const { tasks }  = storeToRefs(tasksStore());
 const { fetchTasks } = tasksStore();
 
 fetchTasks();
@@ -30,6 +36,12 @@ fetchTasks();
 watch(() => storeToRefs, (numberOfItems) => {
   console.log('chang',numberOfItems)
 })
+
+const checkTask = (idTask: Number) => {
+  const taskValue : Array<task> = tasks.value;
+  const taskToChange = taskValue.find(element => element.id === idTask);
+  console.log(taskToChange);
+};
 </script>
 
 <style>
