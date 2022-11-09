@@ -1,11 +1,7 @@
 <template>
   <ul class="todo-list">
     <li>
-      <input
-        class="toggle"
-        type="checkbox"
-        @click="$emit('checkTask')"
-      />
+      <input class="toggle" type="checkbox" v-model="task.completed" @click="$emit('checkTask')"/>
       <label v-if="!task.completed">{{ task.name }}</label>
       <label class="completed-task" v-else>{{ task.name }}</label>
     </li>
@@ -22,8 +18,6 @@ interface task {
 defineProps<{
   task: task;
 }>();
-
-
 </script>
 
 <style>

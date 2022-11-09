@@ -42,5 +42,18 @@ export const tasksStore = defineStore({
       }
       this.fetchTasks();
     },
+
+    async updateTaskStatus(idTask: Number) {
+      let task = this.tasks.find((task) => task.id === idTask);
+      task.completed = !task.completed;
+      const response = await fetch(`http://localhost:3002/tasks/${idTask}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task),
+      });
+      this.fetchTasks();
+    },
   },
 });

@@ -29,7 +29,7 @@ interface task {
 }
 
 const { tasks }  = storeToRefs(tasksStore());
-const { fetchTasks } = tasksStore();
+const { fetchTasks, updateTaskStatus } = tasksStore();
 
 fetchTasks();
 
@@ -38,9 +38,7 @@ watch(() => storeToRefs, (numberOfItems) => {
 })
 
 const checkTask = (idTask: Number) => {
-  const taskValue : Array<task> = tasks.value;
-  const taskToChange = taskValue.find(element => element.id === idTask);
-  console.log(taskToChange);
+  updateTaskStatus(idTask);
 };
 </script>
 
