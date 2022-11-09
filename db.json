@@ -8,7 +8,7 @@
     {
       "id": "2",
       "name": "Curso HTML",
-      "completed": true
+      "completed": false
     },
     {
       "id": "3",
@@ -18,7 +18,7 @@
     {
       "id": 4,
       "name": "hola",
-      "completed": true
+      "completed": false
     }
   ]
 }

@@ -2,7 +2,7 @@
   <ul class="todo-list">
     <li>
       <input class="toggle" type="checkbox" v-model="task.completed" @click="$emit('checkTask')"/>
-      <label v-if="!task.completed">{{ task.name }}</label>
+      <label v-if="!task.completed" @click="$emit('editTask')">{{ task.name }}</label>
       <label class="completed-task" v-else>{{ task.name }}</label>
     </li>
   </ul>

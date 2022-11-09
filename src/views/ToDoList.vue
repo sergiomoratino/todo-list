@@ -1,15 +1,28 @@
 <template>
   <div class="todoapp">
-    <div class="head">
-      <NewTask :number-of-items="tasks.length" />
+    <div v-if="editing">
+      <edit-task
+        :task="editingTask"
+        @keydown.esc="editing = false"
+        @keydown.enter="changeTask(editingTask.id, editingTask.name)"
+      />
     </div>
-    <div v-if="tasks.length > 0" class="main">
-      <div v-for="task in tasks" :key="task.id">
-        <Task :task="task" @checkTask="checkTask(task.id)" />
+    <div v-else-if="!editing">
+      <div class="head">
+        <NewTask :number-of-items="tasks.length" />
       </div>
-    </div>
-    <div v-if="tasks.length > 0" class="footer">
-      <Footer :number-of-items="tasks.length" />
+      <div v-if="tasks.length > 0" class="main">
+        <div v-for="task in tasks" :key="task.id">
+          <Task
+            :task="task"
+            @checkTask="checkTask(task.id)"
+            @editTask="clickEditTask(task)"
+          />
+        </div>
+      </div>
+      <div v-if="tasks.length > 0" class="footer">
+        <Footer :number-of-items="tasks.length" />
+      </div>
     </div>
   </div>
 </template>
@@ -18,9 +31,10 @@
 import Task from '../components/Task.vue';
 import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
+import EditTask from '../components/EditTask.vue';
 import { tasksStore } from '../store/tasks';
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { watch, ref, Ref } from 'vue';
 
 interface task {
   id: Number;
@@ -28,18 +42,34 @@ interface task {
   completed: boolean;
 }
 
-const { tasks }  = storeToRefs(tasksStore());
-const { fetchTasks, updateTaskStatus } = tasksStore();
+const { tasks } = storeToRefs(tasksStore());
+const { fetchTasks, updateTaskStatus, updateTaskName } = tasksStore();
+
+let editing = ref(false);
+let editingTask: Ref<task> = ref({ id: 0, name: 'error', completed: true });
 
 fetchTasks();
 
-watch(() => storeToRefs, (numberOfItems) => {
-  console.log('chang',numberOfItems)
-})
+watch(
+  () => storeToRefs,
+  (numberOfItems) => {
+    console.log('chang', numberOfItems);
+  }
+);
 
 const checkTask = (idTask: Number) => {
   updateTaskStatus(idTask);
 };
+
+const clickEditTask = (task: task) => {
+  editingTask.value = task;
+  editing.value = !editing.value;
+};
+
+const changeTask = (editingTaskId: Number, newName: String ) => {
+  updateTaskName(editingTaskId, newName);
+  editing.value = false;
+}
 </script>
 
 <style>
