@@ -3,11 +3,11 @@
     {
       "id": "1",
       "name": "Curso Javascript",
-      "completed": true
+      "completed": false
     },
     {
       "id": "2",
-      "name": "Curso HTML",
+      "name": "Curso H",
       "completed": false
     },
     {
@@ -18,7 +18,7 @@
     {
       "id": 4,
       "name": "hola",
-      "completed": false
+      "completed": true
     }
   ]
 }

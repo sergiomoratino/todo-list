@@ -43,9 +43,9 @@ export const tasksStore = defineStore({
       this.fetchTasks();
     },
 
-    async updateTaskStatus(idTask: Number) {
+    async updateTaskStatus(idTask: Number, isCompleted: boolean) {
       let task = this.tasks.find((task) => task.id === idTask);
-      task.completed = !task.completed;
+      task.completed = isCompleted;
       const response = await fetch(`http://localhost:3002/tasks/${idTask}`, {
         method: 'PATCH',
         headers: {

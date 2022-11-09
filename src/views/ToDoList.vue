@@ -9,13 +9,16 @@
     </div>
     <div v-else-if="!editing">
       <div class="head">
-        <NewTask :number-of-items="tasks.length" />
+        <NewTask
+          :number-of-items="tasks.length"
+          @toogleAllTasks="toogleAllTask(tasks, $event)"
+        />
       </div>
       <div v-if="tasks.length > 0" class="main">
         <div v-for="task in tasks" :key="task.id">
           <Task
             :task="task"
-            @checkTask="checkTask(task.id)"
+            @checkTask="checkTask(task)"
             @editTask="clickEditTask(task)"
           />
         </div>
@@ -57,8 +60,8 @@ watch(
   }
 );
 
-const checkTask = (idTask: Number) => {
-  updateTaskStatus(idTask);
+const checkTask = (task) => {
+  updateTaskStatus(task.id, !task.completed);
 };
 
 const clickEditTask = (task: task) => {
@@ -66,10 +69,23 @@ const clickEditTask = (task: task) => {
   editing.value = !editing.value;
 };
 
-const changeTask = (editingTaskId: Number, newName: String ) => {
+const changeTask = (editingTaskId: Number, newName: String) => {
   updateTaskName(editingTaskId, newName);
   editing.value = false;
-}
+};
+
+const toogleAllTask = (tasks, event) => {
+  const isChecked = event.target.checked;
+  if (isChecked) {
+    tasks.forEach((element) => {
+      updateTaskStatus(element.id, true);
+    });
+  } else {
+    tasks.forEach((element) => {
+      updateTaskStatus(element.id, false);
+    });
+  }
+};
 </script>
 
 <style>

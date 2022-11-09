@@ -2,7 +2,7 @@
   <div
     style="display: flex; justify-content: space-between; align-items: center"
   >
-    <input class="toggle-all" type="checkbox" />
+    <input class="toggle-all" type="checkbox" @change="$emit('toogleAllTasks', $event)"/>
     <label />
     <input
       class="new-todo"
