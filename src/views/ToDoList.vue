@@ -10,7 +10,7 @@
     <div v-else-if="!editing">
       <div class="head">
         <NewTask
-          :last-task="tasks[tasks.length-1]"
+          :last-task="tasks[tasks.length - 1]"
           @toogleAllTasks="toogleAllTask(tasks, $event)"
         />
       </div>
@@ -25,7 +25,10 @@
         </div>
       </div>
       <div v-if="tasks.length > 0" class="footer">
-        <Footer :number-of-items="tasks.length" />
+        <Footer
+          :number-of-items="tasks.length"
+          @clearCompletedBtn="clearCompletedBtn()"
+        />
       </div>
     </div>
   </div>
@@ -39,7 +42,7 @@ import EditTask from '../components/EditTask.vue';
 import { tasksStore } from '../store/tasks';
 import { storeToRefs } from 'pinia';
 import { watch, ref, Ref } from 'vue';
-import { Task } from '../types'
+import { Task } from '../types';
 
 const { tasks } = storeToRefs(tasksStore());
 const { fetchTasks, updateTaskStatus, updateTaskName, deleteTask } =
@@ -80,6 +83,12 @@ const toogleAllTask = (tasks: Array<Task>, event: any) => {
 
 const clickDeleteTask = (idTask: number) => {
   deleteTask(idTask);
+};
+
+const clearCompletedBtn = () => {
+  tasks.value.forEach((task) => {
+    if (task.completed === true) deleteTask(task.id);
+  });
 };
 </script>
 

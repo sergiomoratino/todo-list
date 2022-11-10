@@ -8,7 +8,7 @@
       <li><a>Active</a></li>
       <li><a>Completed</a></li>
     </ul>
-    <button class="clear-completed">Clear completed</button>
+    <button class="clear-completed" @click="$emit('clearCompletedBtn')">Clear completed</button>
   </div>
 </template>
 

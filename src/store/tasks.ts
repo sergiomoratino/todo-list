@@ -70,7 +70,7 @@ export const tasksStore = defineStore({
           });
           this.fetchTasks();
         } catch (err) {
-          console.error(err)
+          console.error(err);
         }
       }
     },
@@ -83,10 +83,10 @@ export const tasksStore = defineStore({
             'Content-Type': 'application/json',
           },
         });
+        this.fetchTasks();
       } catch (err) {
         console.error(err);
       }
-      this.fetchTasks();
     },
   },
 });
