@@ -31,8 +31,10 @@ const props = defineProps<{
 const { postTask } = tasksStore();
 
 const addTask = (textNewTask: string) => {
+  let idNewTask = 1;
+  if (props.lastTask !== undefined) idNewTask = props.lastTask.id + 1
   const newTask = {
-    id: props.lastTask.id + 1,
+    id: idNewTask,
     name: textNewTask,
     completed: false,
   };
