@@ -16,7 +16,7 @@
       </div>
       <div v-if="tasks.length > 0" class="main">
         <div v-for="task in tasks" :key="task.id">
-          <task
+          <task-component
             :task="task"
             @checkTask="checkTask(task)"
             @editTask="clickEditTask(task, $event)"
@@ -32,25 +32,21 @@
 </template>
 
 <script setup lang="ts">
-import Task from '../components/Task.vue';
+import TaskComponent from '../components/TaskComponent.vue';
 import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
 import EditTask from '../components/EditTask.vue';
 import { tasksStore } from '../store/tasks';
 import { storeToRefs } from 'pinia';
 import { watch, ref, Ref } from 'vue';
-
-interface task {
-  id: Number;
-  name: String;
-  completed: boolean;
-}
+import { Task } from '../types'
 
 const { tasks } = storeToRefs(tasksStore());
-const { fetchTasks, updateTaskStatus, updateTaskName, deleteTask } = tasksStore();
+const { fetchTasks, updateTaskStatus, updateTaskName, deleteTask } =
+  tasksStore();
 
 let editing = ref(false);
-let editingTask: Ref<task> = ref({ id: 0, name: 'error', completed: true });
+let editingTask: Ref<Task> = ref({ id: 0, name: 'error', completed: true });
 
 fetchTasks();
 
@@ -65,7 +61,7 @@ const checkTask = (task) => {
   updateTaskStatus(task.id, !task.completed);
 };
 
-const clickEditTask = (task: task, event) => {
+const clickEditTask = (task: Task, event) => {
   if (event.target !== event.currentTarget) return;
   editingTask.value = task;
   editing.value = !editing.value;

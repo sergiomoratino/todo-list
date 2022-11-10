@@ -20,14 +20,12 @@
 </template>
 
 <script setup lang="ts">
-interface task {
-  id: Number;
-  name: String;
-  completed: boolean;
-}
+import { Ref } from 'vue';
+import { Task } from '../types'
+
 
 defineProps<{
-  task: task;
+  task: Ref<Task>;
 }>();
 </script>
 

@@ -1,14 +1,11 @@
 import { defineStore } from 'pinia';
-export interface task {
-  id: Number;
-  name: String;
-  completed: boolean;
-}
+import { Task } from '../types'
+
 
 export const tasksStore = defineStore({
   id: 'task',
   state: () => ({
-    tasks: Array<task>,
+    tasks: Array<Task>,
   }),
   getters: {
     getTasks: (state) => {
