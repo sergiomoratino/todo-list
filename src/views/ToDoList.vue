@@ -19,7 +19,8 @@
           <Task
             :task="task"
             @checkTask="checkTask(task)"
-            @editTask="clickEditTask(task)"
+            @editTask="clickEditTask(task, $event)"
+            @deleteTask="deleteTask(task)"
           />
         </div>
       </div>
@@ -64,7 +65,8 @@ const checkTask = (task) => {
   updateTaskStatus(task.id, !task.completed);
 };
 
-const clickEditTask = (task: task) => {
+const clickEditTask = (task: task, event) => {
+  if (event.target !== event.currentTarget) return;
   editingTask.value = task;
   editing.value = !editing.value;
 };
@@ -85,6 +87,10 @@ const toogleAllTask = (tasks, event) => {
       updateTaskStatus(element.id, false);
     });
   }
+};
+//TODO
+const deleteTask = (tasks) => {
+  console.log('delete', tasks);
 };
 </script>
 

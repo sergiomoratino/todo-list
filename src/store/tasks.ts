@@ -28,7 +28,7 @@ export const tasksStore = defineStore({
 
     async postTask(newTask: task) {
       try {
-        const response = await fetch('http://localhost:3002/tasks', {
+        await fetch('http://localhost:3002/tasks', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export const tasksStore = defineStore({
     async updateTaskStatus(idTask: Number, isCompleted: boolean) {
       let task = this.tasks.find((task) => task.id === idTask);
       task.completed = isCompleted;
-      const response = await fetch(`http://localhost:3002/tasks/${idTask}`, {
+      await fetch(`http://localhost:3002/tasks/${idTask}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const tasksStore = defineStore({
     async updateTaskName(idTask: Number, newName: String) {
       let task = this.tasks.find((task) => task.id === idTask);
       task.name = newName;
-      const response = await fetch(`http://localhost:3002/tasks/${idTask}`, {
+      await fetch(`http://localhost:3002/tasks/${idTask}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

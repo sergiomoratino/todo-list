@@ -7,7 +7,7 @@
     },
     {
       "id": "2",
-      "name": "Curso H",
+      "name": "Curso HTML",
       "completed": false
     },
     {
@@ -19,6 +19,11 @@
       "id": 4,
       "name": "hola",
       "completed": true
+    },
+    {
+      "id": 5,
+      "name": "Pepe",
+      "completed": false
     }
   ]
 }

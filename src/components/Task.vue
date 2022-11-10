@@ -1,9 +1,20 @@
 <template>
   <ul class="todo-list">
     <li>
-      <input class="toggle" type="checkbox" v-model="task.completed" @click="$emit('checkTask')"/>
-      <label v-if="!task.completed" @click="$emit('editTask')">{{ task.name }}</label>
-      <label class="completed-task" v-else>{{ task.name }}</label>
+      <input
+        class="toggle"
+        type="checkbox"
+        v-model="task.completed"
+        @click="$emit('checkTask')"
+      />
+      <label v-if="!task.completed" @click="$emit('editTask', $event)"
+        >{{ task.name }}
+        <a @click="$emit('deleteTask')" class="close">x</a></label
+      >
+      <label class="completed-task" v-else
+        >{{ task.name }}
+        <a @click="$emit('deleteTask')" class="close">x</a></label
+      >
     </li>
   </ul>
 </template>
@@ -93,9 +104,27 @@ defineProps<{
   transition: color 0.4s;
 }
 
+.todo-list li label a {
+  display: none;
+}
+
+.todo-list li label:hover a {
+  display: block;
+  float: right;
+  color: #af5b5e;
+  font-weight: 600;
+}
+
 .todo-list li.completed label {
   color: #d9d9d9;
   text-decoration: line-through;
+}
+
+.todo-list li.completed label:hover a {
+  display: block;
+  float: right;
+  color: #af5b5e;
+  font-weight: 600;
 }
 
 .todo-list li .destroy {
