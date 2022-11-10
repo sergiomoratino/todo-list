@@ -10,17 +10,17 @@
     <div v-else-if="!editing">
       <div class="head">
         <NewTask
-          :number-of-items="tasks.length"
+          :number-of-items="tasks[tasks.length - 1].id"
           @toogleAllTasks="toogleAllTask(tasks, $event)"
         />
       </div>
       <div v-if="tasks.length > 0" class="main">
         <div v-for="task in tasks" :key="task.id">
-          <Task
+          <task
             :task="task"
             @checkTask="checkTask(task)"
             @editTask="clickEditTask(task, $event)"
-            @deleteTask="deleteTask(task)"
+            @deleteTask="clickDeleteTask(task.id)"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ interface task {
 }
 
 const { tasks } = storeToRefs(tasksStore());
-const { fetchTasks, updateTaskStatus, updateTaskName } = tasksStore();
+const { fetchTasks, updateTaskStatus, updateTaskName, deleteTask } = tasksStore();
 
 let editing = ref(false);
 let editingTask: Ref<task> = ref({ id: 0, name: 'error', completed: true });
@@ -88,9 +88,9 @@ const toogleAllTask = (tasks, event) => {
     });
   }
 };
-//TODO
-const deleteTask = (tasks) => {
-  console.log('delete', tasks);
+
+const clickDeleteTask = (idTask) => {
+  deleteTask(idTask);
 };
 </script>
 

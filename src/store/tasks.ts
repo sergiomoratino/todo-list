@@ -67,6 +67,16 @@ export const tasksStore = defineStore({
         body: JSON.stringify(task),
       });
       this.fetchTasks();
+    },
+
+    async deleteTask(idTask: Number) {
+      await fetch(`http://localhost:3002/tasks/${idTask}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      this.fetchTasks();
     }
   },
 });

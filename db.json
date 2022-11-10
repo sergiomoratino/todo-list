@@ -1,28 +1,28 @@
 {
   "tasks": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Curso Javascript",
       "completed": false
     },
     {
-      "id": "2",
-      "name": "Curso HTML",
-      "completed": false
-    },
-    {
-      "id": "3",
+      "id": 3,
       "name": "Curso CSS",
       "completed": false
     },
     {
       "id": 4,
-      "name": "hola",
-      "completed": true
+      "name": "Curs",
+      "completed": false
     },
     {
-      "id": 5,
-      "name": "Pepe",
+      "id": 7,
+      "name": "Jorge",
+      "completed": false
+    },
+    {
+      "id": 8,
+      "name": "Paco",
       "completed": false
     }
   ]
