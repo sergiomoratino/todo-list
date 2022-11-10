@@ -2,7 +2,17 @@
   "tasks": [
     {
       "id": 1,
-      "name": "dee",
+      "name": "HTML Course",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "name": "Javascript Course",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "name": "Vue Course - Editado ",
       "completed": false
     }
   ]
