@@ -23,7 +23,6 @@ export const tasksStore = defineStore({
     },
 
     async postTask(newTask: Task) {
-      let response: any;
       try {
         await fetch('http://localhost:3002/tasks', {
           method: 'POST',
@@ -32,8 +31,6 @@ export const tasksStore = defineStore({
           },
           body: JSON.stringify(newTask),
         });
-        const tasks = await response.json();
-        this.tasks = tasks;
       } catch (err) {
         console.error(err);
       }

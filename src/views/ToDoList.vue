@@ -10,7 +10,7 @@
     <div v-else-if="!editing">
       <div class="head">
         <NewTask
-          :number-of-items="tasks[tasks.length - 1].id"
+          :last-task="tasks[tasks.length-1]"
           @toogleAllTasks="toogleAllTask(tasks, $event)"
         />
       </div>
@@ -49,13 +49,6 @@ let editing = ref(false);
 let editingTask: Ref<any> = ref({ id: 0, name: 'error', completed: true });
 
 fetchTasks();
-
-watch(
-  () => storeToRefs,
-  (numberOfItems) => {
-    console.log('chang', numberOfItems);
-  }
-);
 
 const checkTask = (task: Task) => {
   updateTaskStatus(task.id, !task.completed);

@@ -14,26 +14,6 @@
       "id": 7,
       "name": "Jorge",
       "completed": false
-    },
-    {
-      "id": 8,
-      "name": "Paco",
-      "completed": false
-    },
-    {
-      "id": 9,
-      "name": "Curso CSS",
-      "completed": false
-    },
-    {
-      "id": 10,
-      "name": "Hello",
-      "completed": false
-    },
-    {
-      "id": 11,
-      "name": "Hello2",
-      "completed": false
     }
   ]
 }

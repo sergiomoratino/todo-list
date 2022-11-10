@@ -10,30 +10,33 @@
       id="newTaskInput"
       name="newTaskInput"
       placeholder="What needs to be done?"
-      v-on:keyup.enter="addTask(textNewTask)"
-      v-model="textNewTask"
+      v-on:keyup.enter="addTask(inputTextNewTask)"
+      v-model="inputTextNewTask"
       data="textNewTask"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { tasksStore } from '../store/tasks';
+import { Task } from '../types';
 
-let textNewTask = '';
+let inputTextNewTask = ref('');
 
 const props = defineProps<{
-  numberOfItems: number;
+  lastTask: Task;
 }>();
 
 const { postTask } = tasksStore();
 
 const addTask = (textNewTask: string) => {
   const newTask = {
-    id: props.numberOfItems + 1,
+    id: props.lastTask.id + 1,
     name: textNewTask,
     completed: false,
   };
+  inputTextNewTask.value = ''
   postTask(newTask);
 };
 </script>
