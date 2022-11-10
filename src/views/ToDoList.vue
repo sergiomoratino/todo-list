@@ -41,7 +41,7 @@ import NewTask from '../components/NewTask.vue';
 import EditTask from '../components/EditTask.vue';
 import { tasksStore } from '../store/tasks';
 import { storeToRefs } from 'pinia';
-import { watch, ref, Ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { Task } from '../types';
 
 const { tasks } = storeToRefs(tasksStore());

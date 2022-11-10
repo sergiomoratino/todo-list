@@ -4,18 +4,23 @@
       <strong>{{ numberOfItems }} items left</strong>
     </div>
     <ul class="filters">
-      <li><a>All</a></li>
-      <li><a>Active</a></li>
-      <li><a>Completed</a></li>
+      <li><a @click="changeRoute('all')">All</a></li>
+      <li><a @click="changeRoute('active')">Active</a></li>
+      <li><a @click="changeRoute('completed')">Completed</a></li>
     </ul>
     <button class="clear-completed" @click="$emit('clearCompletedBtn')">Clear completed</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { routeStore } from '../store/route';
+
+const { changeRoute } = routeStore()
+
 defineProps<{
   numberOfItems: number;
 }>();
+
 </script>
 
 <style scoped>

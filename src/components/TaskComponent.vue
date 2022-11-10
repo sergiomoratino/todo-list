@@ -7,11 +7,17 @@
         v-model="task.completed"
         @click="$emit('checkTask')"
       />
-      <label v-if="!task.completed" @click="$emit('editTask', $event)"
+      <label
+        v-show="route === 'all' || route === 'active'"
+        v-if="!task.completed"
+        @click="$emit('editTask', $event)"
         >{{ task.name }}
         <a @click="$emit('deleteTask')" class="close">x</a></label
       >
-      <label class="completed-task" v-else
+      <label
+        v-show="route === 'all' || route === 'completed'"
+        class="completed-task"
+        v-else
         >{{ task.name }}
         <a @click="$emit('deleteTask')" class="close">x</a></label
       >
@@ -20,9 +26,11 @@
 </template>
 
 <script setup lang="ts">
-import { Ref } from 'vue';
-import { Task } from '../types'
+import { storeToRefs } from 'pinia';
+import { routeStore } from '../store/route';
+import { Task } from '../types';
 
+const { route } = storeToRefs(routeStore());
 
 defineProps<{
   task: Task;
