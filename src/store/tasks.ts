@@ -49,7 +49,6 @@ export const tasksStore = defineStore({
             },
             body: JSON.stringify(task),
           });
-          this.fetchTasks();
         } catch (err) {
           console.error(err);
         }
