@@ -46,7 +46,7 @@ const { fetchTasks, updateTaskStatus, updateTaskName, deleteTask } =
   tasksStore();
 
 let editing = ref(false);
-let editingTask: Ref<Task> = ref({ id: 0, name: 'error', completed: true });
+let editingTask: Ref<any> = ref({ id: 0, name: 'error', completed: true });
 
 fetchTasks();
 
@@ -57,22 +57,22 @@ watch(
   }
 );
 
-const checkTask = (task) => {
+const checkTask = (task: Task) => {
   updateTaskStatus(task.id, !task.completed);
 };
 
-const clickEditTask = (task: Task, event) => {
+const clickEditTask = (task: Task, event: Event) => {
   if (event.target !== event.currentTarget) return;
   editingTask.value = task;
   editing.value = !editing.value;
 };
 
-const changeTask = (editingTaskId: Number, newName: String) => {
+const changeTask = (editingTaskId: number, newName: string) => {
   updateTaskName(editingTaskId, newName);
   editing.value = false;
 };
 
-const toogleAllTask = (tasks, event) => {
+const toogleAllTask = (tasks: Array<Task>, event: any) => {
   const isChecked = event.target.checked;
   if (isChecked) {
     tasks.forEach((element) => {
@@ -85,7 +85,7 @@ const toogleAllTask = (tasks, event) => {
   }
 };
 
-const clickDeleteTask = (idTask) => {
+const clickDeleteTask = (idTask: number) => {
   deleteTask(idTask);
 };
 </script>

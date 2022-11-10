@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia';
-import { Task } from '../types'
-
+import { Task } from '../types';
 
 export const tasksStore = defineStore({
   id: 'task',
   state: () => ({
-    tasks: Array<Task>,
+    tasks: [] as Array<Task>,
   }),
   getters: {
     getTasks: (state) => {
@@ -23,7 +22,8 @@ export const tasksStore = defineStore({
       }
     },
 
-    async postTask(newTask: task) {
+    async postTask(newTask: Task) {
+      let response: any;
       try {
         await fetch('http://localhost:3002/tasks', {
           method: 'POST',
@@ -40,40 +40,56 @@ export const tasksStore = defineStore({
       this.fetchTasks();
     },
 
-    async updateTaskStatus(idTask: Number, isCompleted: boolean) {
+    async updateTaskStatus(idTask: number, isCompleted: boolean) {
       let task = this.tasks.find((task) => task.id === idTask);
-      task.completed = isCompleted;
-      await fetch(`http://localhost:3002/tasks/${idTask}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      });
-      this.fetchTasks();
+      if (task !== undefined) {
+        task.completed = isCompleted;
+        try {
+          await fetch(`http://localhost:3002/tasks/${idTask}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(task),
+          });
+          this.fetchTasks();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     },
 
-    async updateTaskName(idTask: Number, newName: String) {
+    async updateTaskName(idTask: number, newName: string) {
       let task = this.tasks.find((task) => task.id === idTask);
-      task.name = newName;
-      await fetch(`http://localhost:3002/tasks/${idTask}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      });
-      this.fetchTasks();
+      if (task !== undefined) {
+        task.name = newName;
+        try {
+          await fetch(`http://localhost:3002/tasks/${idTask}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(task),
+          });
+          this.fetchTasks();
+        } catch (err) {
+          console.error(err)
+        }
+      }
     },
 
-    async deleteTask(idTask: Number) {
-      await fetch(`http://localhost:3002/tasks/${idTask}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    async deleteTask(idTask: number) {
+      try {
+        await fetch(`http://localhost:3002/tasks/${idTask}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
       this.fetchTasks();
-    }
+    },
   },
 });

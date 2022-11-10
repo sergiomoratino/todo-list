@@ -11,16 +11,10 @@
 </template>
 
 <script setup lang="ts">
-import { watch, toRefs, Ref } from 'vue';
-
-interface task {
-  id: Number;
-  name: string;
-  completed: boolean;
-}
+import { Task } from '../types'
 
 defineProps<{
-    task: Ref<task>;
+    task: Task;
 }>();
 
 

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  numberOfItems: Number;
+  numberOfItems: number;
 }>();
 </script>
 

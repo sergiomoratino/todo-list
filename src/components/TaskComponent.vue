@@ -25,7 +25,7 @@ import { Task } from '../types'
 
 
 defineProps<{
-  task: Ref<Task>;
+  task: Task;
 }>();
 </script>
 
